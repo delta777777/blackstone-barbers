@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blackstone Barbers — Premium Grooming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090909;
+      --panel: #111111;
+      --panel-2: #171513;
+      --text: #f4f0e9;
+      --muted: #a9a39a;
+      --gold: #c7a66a;
+      --line: #302b24;
+      --serif: "Playfair Display", Georgia, serif;
+      --sans: "DM Sans", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    .container { width: min(1120px, calc(100% - 48px)); margin: auto; }
+    .topbar { height: 72px; border-bottom: 1px solid #ffffff12; background: #080808e8; position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px); }
+    .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: 180px; }
+    .brand-mark { font: 38px var(--serif); color: var(--gold); line-height: 1; }
+    .brand-copy { font: 11px/1.15 var(--serif); letter-spacing: .13em; }
+    .brand-copy small { display: block; font: 8px var(--sans); letter-spacing: .28em; color: var(--muted); margin-top: 3px; }
+    .navlinks { display: flex; align-items: center; gap: 28px; font-size: 12px; color: #d0ccc4; }
+    .navlinks a:hover { color: var(--gold); }
+    .outline-btn, .gold-btn { border: 1px solid var(--gold); padding: 12px 18px; font-size: 11px; letter-spacing: .02em; display: inline-flex; align-items: center; justify-content: center; gap: 18px; transition: .2s; cursor: pointer; }
+    .outline-btn { background: transparent; color: var(--text); }
+    .gold-btn { background: var(--gold); color: #17120b; border-color: var(--gold); font-weight: 600; }
+    .outline-btn:hover, .gold-btn:hover { transform: translateY(-2px); filter: brightness(1.12); }
+    .hero { min-height: 480px; display: flex; align-items: center; position: relative; overflow: hidden; background: #0b0a09; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #050505 0%, #050505e8 32%, #05050542 62%, #05050512 100%), url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1800&q=85"); background-size: cover; background-position: center; }
+    .hero::before { background-image: linear-gradient(90deg, #050505 0%, #050505e8 32%, #05050542 62%, #05050512 100%), url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1800&q=85"); }
+    .hero-content { position: relative; z-index: 1; padding: 72px 0 80px; max-width: 560px; }
+    .eyebrow { color: var(--gold); font-size: 9px; letter-spacing: .24em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--gold); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font: clamp(38px, 5vw, 62px)/1.02 var(--serif); letter-spacing: -.035em; margin: 18px 0 14px; text-transform: uppercase; }
+    h1 span { display: block; }
+    .hero p { color: #c5c0b8; font-size: 13px; margin-bottom: 24px; }
+    .hero-bottom { position: absolute; bottom: 18px; left: 0; right: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; font-size: 9px; color: #b7b1a8; }
+    .scroll-label { display: flex; align-items: center; gap: 9px; }
+    .scroll-label span { border: 1px solid #71695d; border-radius: 10px; width: 13px; height: 19px; display: inline-block; }
+    .social { display: flex; gap: 12px; align-items: center; }
+    .social a { color: var(--muted); font-size: 11px; }
+    section { padding: 54px 0; }
+    .section-heading { text-align: center; margin-bottom: 28px; }
+    .section-heading .eyebrow { justify-content: center; margin-bottom: 10px; }
+    h2 { font: 30px/1.1 var(--serif); margin-bottom: 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service-card { min-height: 150px; position: relative; overflow: hidden; border: 1px solid var(--line); background: var(--panel); display: flex; align-items: end; padding: 20px; }
+    .service-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55; transition: .3s; }
+    .service-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #090909e8, #09090945 100%); }
+    .service-card:hover img { transform: scale(1.05); opacity: .75; }
+    .service-info { position: relative; z-index: 1; max-width: 70%; }
+    .service-icon { color: var(--gold); font-size: 20px; margin-bottom: 10px; }
+    .service-info h3 { font: 16px var(--serif); margin-bottom: 5px; }
+    .service-info p { color: #b9b2a8; font-size: 10px; margin-bottom: 7px; }
+    .price { color: var(--gold); font-size: 12px; }
+    .gallery { padding-top: 35px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .gallery-grid img { width: 100%; height: 150px; object-fit: cover; filter: saturate(.75); transition: .25s; }
+    .gallery-grid img:hover { filter: saturate(1); transform: translateY(-3px); }
+    .about { padding-top: 20px; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; border: 1px solid var(--line); }
+    .about-photo { min-height: 280px; background: url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80") center/cover; }
+    .about-photo { background-image: url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80"); }
+    .about-copy { background: #111; padding: clamp(28px, 5vw, 58px); display: flex; flex-direction: column; justify-content: center; }
+    .about-copy h2 { font-size: 30px; margin: 13px 0; }
+    .about-copy p { color: #aaa49b; font-size: 11px; line-height: 1.8; max-width: 390px; margin-bottom: 22px; }
+    .about-copy .gold-btn { align-self: flex-start; }
+    .lower-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; padding-top: 42px; }
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .barber { border: 1px solid #292520; background: #111; text-align: center; padding-bottom: 14px; }
+    .barber img { width: 100%; height: 125px; object-fit: cover; object-position: center top; filter: grayscale(.25); }
+    .barber h3 { font: 12px var(--serif); margin: 10px 4px 3px; }
+    .barber p { color: var(--muted); font-size: 9px; margin: 0; }
+    .booking { border-left: 1px solid var(--line); padding-left: 42px; }
+    .booking h2 { margin: 10px 0 7px; }
+    .booking > p { color: var(--muted); font-size: 10px; margin-bottom: 18px; }
+    .booking-form { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .booking-form select, .booking-form input { width: 100%; color: #ddd; background: #141414; border: 1px solid #2b2925; padding: 12px; font-size: 10px; outline: none; }
+    .booking-form select:focus, .booking-form input:focus { border-color: var(--gold); }
+    .booking-form button { grid-column: 1 / -1; width: 100%; }
+    .form-message { grid-column: 1/-1; color: var(--gold); font-size: 11px; min-height: 14px; }
+    footer { border-top: 1px solid var(--line); padding: 22px 0; margin-top: 15px; }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-links { display: flex; gap: 24px; font-size: 10px; color: #bcb6ad; }
+    .copyright { font-size: 9px; color: #777168; }
+    @media (max-width: 850px) {
+      .navlinks { gap: 14px; }
+      .nav .outline-btn { display: none; }
+      .hero { min-height: 430px; }
+      .hero::before { background-image: linear-gradient(90deg, #050505 0%, #050505d9 40%, #05050555 100%), url("https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1400&q=80"); background-position: 58% center; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .gallery-grid img { height: 170px; }
+      .lower-grid { gap: 28px; }
+      .booking { padding-left: 28px; }
+    }
+    @media (max-width: 600px) {
+      .container { width: min(100% - 32px, 1120px); }
+      .topbar { height: auto; min-height: 64px; }
+      .nav { flex-wrap: wrap; padding: 12px 0; }
+      .brand { min-width: 0; }
+      .navlinks { width: 100%; overflow-x: auto; padding: 6px 0 2px; gap: 20px; }
+      .navlinks a { white-space: nowrap; }
+      .hero { min-height: 420px; }
+      .hero-content { padding: 58px 0 70px; }
+      h1 { font-size: 40px; }
+      .hero-bottom { bottom: 13px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { min-height: 155px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .gallery-grid img { height: 145px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo { min-height: 220px; }
+      .lower-grid { grid-template-columns: 1fr; }
+      .booking { border-left: 0; border-top: 1px solid var(--line); padding: 30px 0 0; }
+      .team-grid { gap: 8px; }
+      .barber img { height: 115px; }
+      .footer-row { flex-wrap: wrap; }
+      .footer-links { order: 3; width: 100%; justify-content: space-between; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="Blackstone Barbers home">
+        <span class="brand-mark">B</span>
+        <span class="brand-copy">BLACKSTONE<small>BARBERS</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a>
+        <a href="#about">About</a><a href="#team">Team</a><a href="#booking">Booking</a>
+      </nav>
+      <a class="outline-btn" href="#booking">Book Appointment <span>↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <div class="eyebrow">Premium Barbershop</div>
+        <h1><span>Your Style.</span><span>Your Statement.</span></h1>
+        <p>Premium grooming for the modern gentleman.</p>
+        <a class="gold-btn" href="#booking">Book an Appointment <span>→</span></a>
+      </div>
+      <div class="container hero-bottom">
+        <div class="scroll-label"><span></span> Scroll Down</div>
+        <div class="social">Follow Us: <a href="#" aria-label="Instagram">◎</a><a href="#" aria-label="TikTok">♪</a><a href="#" aria-label="YouTube">▶</a></div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">Our Services</div><h2>Top-Tier Grooming Services</h2></div>
+        <div class="services-grid">
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80" alt="Classic haircut">
+            <div class="service-info"><div class="service-icon">✂</div><h3>Classic Haircut</h3><p>Timeless style, perfect details.</p><div class="price">$25</div></div>
+          </article>
+          <article class="service-card">
+           <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=85" alt="Haircut and beard">
+            <div class="service-info"><div class="service-icon">♙</div><h3>Haircut & amp; Beard</h3><p>Complete look, sharp finish.</p><div class="price">$40</div></div>
+          </article>
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=800&q=80" alt="Beard trim">
+            <div class="service-info"><div class="service-icon">／</div><h3>Beard Trim</h3><p>Keep your beard in shape.</p><div class="price">$20</div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-heading"><div class="eyebrow">Our Work</div><h2>Gallery of Styles</h2></div>
+       <div class="gallery-grid">
+  <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=85" alt="Haircut">
+
+  <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=85" alt="Beard trim">
+
+  <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=85" alt="Barbershop">
+
+  <img src="https://images.fresha.com/locations/location-profile-images/2483193/3931940/aa98f5bc-b2f0-466a-af08-4d5a3333906e-FITBARBERSTUDIO-BG-Plovdiv-Plovdiv-gkHristoBotev-NorthYuzhen-Fresha.jpg?class=venue-gallery-mobile&f_width=1200" alt="Fresh fade haircut">
+
+<img src="https://images.unsplash.com/photo-1669568921948-f0346e0ee73e?auto=format&fit=crop&w=700&q=85" alt="Barber trimming haircut">
+
+<img src="https://images.fresha.com/locations/location-profile-images/2484148/4939126/b970f665-7cda-46cc-9710-c359467d2672-BazzHairZone-CA-BritishColumbia-Delta-Fresha.jpg?class=venue-gallery-mobile&f_width=1200" alt="Modern skin fade">
+</div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container about-grid">
+        <div class="about-photo" role="img" aria-label="Interior of a premium barbershop"></div>
+        <div class="about-copy">
+          <div class="eyebrow">About Us</div>
+          <h2>More Than a Barbershop</h2>
+          <p>Blackstone Barbers is a premium grooming destination where style meets tradition. We're dedicated to providing exceptional service, modern cuts, and a unique atmosphere.</p>
+          <a class="gold-btn" href="#team">Learn More <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container lower-grid">
+        <div class="team">
+          <div class="eyebrow">Our Barbers</div><h2>Meet Our Team</h2>
+          <div class="team-grid">
+            <article class="barber"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80" alt="Daniel Carter"><h3>Daniel Carter</h3><p>Master Barber</p></article>
+            <article class="barber"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80" alt="Michael Smith"><h3>Michael Smith</h3><p>Barber Expert</p></article>
+            <article class="barber"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="Alex Johnson"><h3>Alex Johnson</h3><p>Style Specialist</p></article>
+          </div>
+        </div>
+        <div class="booking" id="booking">
+          <div class="eyebrow">Booking</div><h2>Reserve Your Spot</h2><p>Choose your service, date and time,<br>and let us take care of the rest.</p>
+          <form class="booking-form" id="bookingForm">
+            <select name="service" required aria-label="Service"><option value="">Service</option><option>Classic Haircut — $25</option><option>Haircut &amp; Beard — $40</option><option>Beard Trim — $20</option></select>
+            <select name="barber" required aria-label="Barber"><option value="">Barber</option><option>Daniel Carter</option><option>Michael Smith</option><option>Alex Johnson</option></select>
+            <input type="date" name="date" required aria-label="Date">
+            <select name="time" required aria-label="Time"><option value="">Time</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option></select>
+            <button class="gold-btn" type="submit">Book Appointment</button>
+            <div class="form-message" id="formMessage" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="#home"><span class="brand-mark">B</span><span class="brand-copy">BLACKSTONE<small>BARBERS</small></span></a>
+      <nav class="footer-links"><a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#team">Team</a><a href="#booking">Booking</a></nav>
+      <div class="copyright">© 2025 Blackstone Barbers. All rights reserved.</div>
+    </div>
+  </footer>
+  <script>
+    const form = document.getElementById("bookingForm");
+    const message = document.getElementById("formMessage");
+    const dateInput = form.elements.date;
+    dateInput.min = new Date().toISOString().split("T")[0];
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      message.textContent = `Thanks! Your ${data.get("service")} request for ${data.get("date")} at ${data.get("time")} is ready. This demo doesn't send bookings yet.`;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
